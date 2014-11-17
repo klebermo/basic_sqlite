@@ -144,7 +144,8 @@ public class Dao<E extends Model> {
     public void onCreate(SQLiteDatabase db) {
   		try {
   			Model object = clazz.newInstance();
-        db.execSQL("CREATE TABLE " + this.getClazz().getSimpleName() + object.dbFields().toString().replace("[", "(").replace("]", ")") );
+        String CREATE = "CREATE TABLE " + this.getClazz().getSimpleName() + object.dbFields().toString().replace("[", "(").replace("]", ")");
+        db.execSQL( CREATE );
   		} catch (InstantiationException | IllegalAccessException e) {
   			e.printStackTrace();
   		}

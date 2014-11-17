@@ -46,7 +46,7 @@ public abstract class Model {
     List<String> name = this.getFields();
     List<String> type = this.getTypes();
     for(int i=0; i<name.size(); i++) {
-      if(name.get(i).equals("id")) {
+      if(name.get(i).equals("_id")) {
         lista.add(new String("_id INTEGER PRIMARY KEY"));
       } else {
         if(type.get(i).equals("String"))

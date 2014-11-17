@@ -60,7 +60,7 @@ public class Dao<E extends Model> {
       for(int i=1; i<campos.size(); i++)
         pares.add(campos.get(i)+" = ?");
 
-      String spares = pares.toString().replace("[", "").replace("]", "").replace(",", " and ");
+      String spares = pares.toString().replace("[", "").replace("]", "");
       String UPDATE = "update " + clazz.getSimpleName() + " set " + spares + " where _id='" + data[0] + "'";
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
@@ -87,23 +87,6 @@ public class Dao<E extends Model> {
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
-
-  public E findById(int id) {
-    SQLiteDatabase db = openHelper.getReadableDatabase();
-    Cursor cursor = db.query(clazz.getSimpleName(), null, "_id = ?", new String[] {String.valueOf(id)}, null, null, null, null);
-
-    Model object;
-    try {
-      object = clazz.newInstance();
-      for(int i=0; i<cursor.getColumnCount(); i++) {
-        object.setValue(i, cursor.getString(i));
-      }
-    } catch (Exception e) {
-      object = null;
-    }
-
-    return (E) object;
   }
 
   public Cursor findByField(String key, String value) {

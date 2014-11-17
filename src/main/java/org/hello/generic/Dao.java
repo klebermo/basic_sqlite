@@ -38,7 +38,6 @@ public class Dao<E extends Model> {
       String scampos = campos.toString().replace("[", "(").replace("]", ")");
       String svalues = values.toString().replace("[", "(").replace("]", ")");
       String INSERT = "insert into " + clazz.getSimpleName() + scampos + " values "+ svalues;
-      System.out.println("===== INSERT -> "+INSERT);
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
       SQLiteStatement insertStmt = db.compileStatement(INSERT);
@@ -58,19 +57,17 @@ public class Dao<E extends Model> {
       List<String> campos = object.getFields();
       List<String> pares = new ArrayList<String>();
 
-      for(int i=0; i<campos.size(); i++)
+      for(int i=1; i<campos.size(); i++)
         pares.add(campos.get(i)+" = ?");
 
       String spares = pares.toString().replace("[", "").replace("]", "").replace(",", " and ");
       String UPDATE = "update " + clazz.getSimpleName() + " set " + spares + " where _id='" + data[0] + "'";
-      System.out.println("===== UPDATE -> "+UPDATE);
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
       SQLiteStatement updateStmt = db.compileStatement(UPDATE);
 
-      for(int i=0; i<data.length; i++) {
-        updateStmt.bindString(i+1, data[i]);
-      }
+      for(int i=1; i<data.length; i++)
+        updateStmt.bindString(i, data[i]);
 
       updateStmt.executeUpdateDelete();
     } catch (Exception e) {
@@ -82,7 +79,6 @@ public class Dao<E extends Model> {
     try {
       Model object = clazz.newInstance();
       String DELETE = "delete from " + clazz.getSimpleName() + " where _id='" + data[0] + "'";
-      System.out.println("===== DELETE -> "+DELETE);
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
       SQLiteStatement deleteStmt = db.compileStatement(DELETE);

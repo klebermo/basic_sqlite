@@ -46,9 +46,6 @@ public class FormEditItemActivity extends Activity {
     Cursor u = usuario.findByFields(new String[] {"nome", "sobrenome"}, new String[] {itemA, itemB});
     startManagingCursor(u);
 
-    System.out.println("u.getCount == "+u.getCount());
-    System.out.println("u.getColumnCount == "+u.getColumnCount());
-
     if(u.getCount() > 0) {
       if(u.getColumnCount() > 0) {
         u.moveToFirst();

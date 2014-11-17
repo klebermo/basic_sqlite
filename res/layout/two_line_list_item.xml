@@ -7,16 +7,16 @@
   <TextView android:id="@+id/textA"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:textSize="18dp" />
+       android:textSize="24dp" />
 
   <TextView android:id="@+id/space"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:textSize="18dp"
+       android:textSize="24dp"
        android:text=" "/>
 
   <TextView android:id="@+id/textB"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:textSize="18dp" />
+       android:textSize="24dp" />
 </LinearLayout>

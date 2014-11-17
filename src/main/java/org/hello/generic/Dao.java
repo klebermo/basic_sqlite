@@ -38,13 +38,13 @@ public class Dao<E extends Model> {
       String scampos = campos.toString().replace("[", "(").replace("]", ")");
       String svalues = values.toString().replace("[", "(").replace("]", ")");
       String INSERT = "insert into " + clazz.getSimpleName() + scampos + " values "+ svalues;
+      System.out.println("===== INSERT -> "+INSERT);
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
       SQLiteStatement insertStmt = db.compileStatement(INSERT);
 
-      for(int i=0; i<data.length; i++) {
+      for(int i=0; i<data.length; i++)
         insertStmt.bindString(i+1, data[i]);
-      }
 
       insertStmt.executeInsert();
     } catch (Exception e) {
@@ -63,6 +63,7 @@ public class Dao<E extends Model> {
 
       String spares = pares.toString().replace("[", "").replace("]", "").replace(",", " and ");
       String UPDATE = "update " + clazz.getSimpleName() + " set " + spares + " where _id='" + data[0] + "'";
+      System.out.println("===== UPDATE -> "+UPDATE);
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
       SQLiteStatement updateStmt = db.compileStatement(UPDATE);
@@ -81,6 +82,7 @@ public class Dao<E extends Model> {
     try {
       Model object = clazz.newInstance();
       String DELETE = "delete from " + clazz.getSimpleName() + " where _id='" + data[0] + "'";
+      System.out.println("===== DELETE -> "+DELETE);
 
       SQLiteDatabase db = openHelper.getWritableDatabase();
       SQLiteStatement deleteStmt = db.compileStatement(DELETE);
